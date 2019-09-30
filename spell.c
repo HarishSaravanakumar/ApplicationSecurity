@@ -7,16 +7,11 @@
  * Application Security
  * Assignment 1
  **/
-
 /**
  * Returns true if word is in dictionary else false.
  **/
 bool check_word(const char* word, hashmap_t hashtable[])
 {
-    // char word[strlen(c)];
-    // for (int i=0;i <=strlen(c);i++){
-    //     word[i] = c[i];
-    // }
     int word_index = hash_function(word); // hash value of word being passed in
     node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
     while(index_node != NULL){ // compare word and item in linked list
@@ -27,7 +22,6 @@ bool check_word(const char* word, hashmap_t hashtable[])
     }
     return false; // word not found in hashtable
 }
-
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
  **/
@@ -36,7 +30,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){
     if(!dict_file){ //if dict_file doesn't exist, return false
     	return false;
     }
-
     if(dict_file){ //
         int line_hashvalue;
         char buffer[LENGTH]; // char array of allowed word length
@@ -71,7 +64,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){
       	return false;
     }
 }
-
 /**
  * Returns lowercase of input
  **/
@@ -91,8 +83,6 @@ char * str_lower(char *str_input){
     }
     return "";
 }
-
-
 /**
  * Removes punctuation from input
  **/
@@ -108,13 +98,11 @@ char *remove_punc(char *str_input) {
     while (ispunct(*b) && a < b){ 
     	*b = 0; b--; 
     }
-    /* also if you want to preserve the original address */
     if (strlen(a) == 0){
         return NULL;
     }
     return a;
 }
-
 /**
  * Returns true if all words are spelled correcty, false otherwise. Array misspelled is populated with words that are misspelled.
  **/

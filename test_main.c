@@ -72,16 +72,16 @@ START_TEST(test_check_word_really_extra_long_word)
 }
 END_TEST
 // *WORKS?*
-START_TEST(test_check_single_word_overflow_dictionary)
-{
-    hashmap_t hashtable[HASH_SIZE];
-    load_dictionary("test2.txt", hashtable);
-    int word1_hash = hash_function("Historicallyorganizationsandgovernmentshaveta");
-    char *word1 = hashtable[word1_hash];
-    ck_assert(strcmp(word1, "Historicallyorganizationsandgovernmentshaveta") == 0);
-    ck_assert(LENGTH == strlen(word1));
-}
-END_TEST
+// START_TEST(test_check_single_word_overflow_dictionary)
+// {
+//     hashmap_t hashtable[HASH_SIZE];
+//     load_dictionary("test2.txt", hashtable);
+//     int word1_hash = hash_function("Historicallyorganizationsandgovernmentshaveta");
+//     char *word1 = hashtable[word1_hash];
+//     ck_assert(strcmp(word1, "Historicallyorganizationsandgovernmentshaveta") == 0);
+//     ck_assert(LENGTH == strlen(word1));
+// }
+// END_TEST
 
 START_TEST(test_check_word_leading_trailing_punct)
 {
@@ -136,7 +136,7 @@ check_word_suite(void)
     // tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_null_input);
     tcase_add_test(check_word_case, test_check_word_really_extra_long_word);
-    tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
+    // tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
     tcase_add_test(check_word_case, test_check_word_leading_trailing_punct);
     suite_add_tcase(suite, check_word_case);
 
