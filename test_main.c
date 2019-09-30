@@ -53,6 +53,20 @@ END_TEST
 
 // TEST IF NULL
 // *WORKS*
+START_TEST(test_check_word_empty_hashtable)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    for (int i = 0; i < HASH_SIZE; i++)
+    hashtable[i] = NULL;
+
+    char * word = "empty";
+        
+    ck_assert(!check_word(word, hashtable));
+    
+
+}
+END_TEST
+
 START_TEST(test_null_input)
 {
     hashmap_t hashtable[HASH_SIZE];
@@ -133,6 +147,7 @@ check_word_suite(void)
     check_word_case = tcase_create("Core");
     // tcase_add_test(check_word_case, test_check_word_normal);
     // tcase_add_test(check_word_case, test_check_words_normal);
+    tcase_add_test(check_word_case, test_check_word_empty_hashtable);
     tcase_add_test(check_word_case, test_check_word_buffer_overflow2);
     tcase_add_test(check_word_case, test_null_input);
     tcase_add_test(check_word_case, test_check_word_really_extra_long_word);
