@@ -112,17 +112,17 @@ START_TEST(test_check_word_buffer_overflow2)
 }
 END_TEST
 
-// //checking case sensitiveness
-// START_TEST(test_check_word_case)
-// {   
-//     node* hashtable[HASH_SIZE];
-//     load_dictionary(DICTIONARY_MAIN, hashtable);
-//     const char* correct_word = "IEEE";
-//     const char* lcase = "ieee";
-//     ck_assert(check_word(correct_word, hashtable));
-//     ck_assert(check_word(lcase, hashtable));
-// }
-// END_TEST
+//checking case sensitiveness
+START_TEST(test_check_word_case)
+{   
+    node* hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    const char* correct_word = "IEEE";
+    const char* lcase = "ieee";
+    ck_assert(check_word(correct_word, hashtable));
+    ck_assert(check_word(lcase, hashtable));
+}
+END_TEST
 
 Suite *
 check_word_suite(void)
