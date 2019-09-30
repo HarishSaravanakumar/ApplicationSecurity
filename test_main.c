@@ -76,7 +76,7 @@ START_TEST(test_null_input)
 }
 END_TEST
 // *WORKS*
-START_TEST(test_check_word_really_extra_long_word){
+START_TEST(test_check_word_big_word){
     // Check for word equal to 45characters, doesnt matter if misspelled
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
@@ -131,7 +131,7 @@ START_TEST(test_check_word_case)
     load_dictionary(DICTIONARY, hashtable);
     const char* correct_word = "IEEE";
     const char* lcase = "ieee";
-    ck_assert(check_word(correct_word, hashtable));
+    ck_assert(check_word("IEEE", hashtable));
     ck_assert(check_word(lcase, hashtable));
 }
 END_TEST
