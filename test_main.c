@@ -71,7 +71,7 @@ START_TEST(test_check_word_really_extra_long_word)
     ck_assert(!check_word(really_extra_long_word, hashtable));
 }
 END_TEST
-
+// *WORKS?*
 START_TEST(test_check_single_word_overflow_dictionary)
 {
     hashmap_t hashtable[HASH_SIZE];
@@ -80,6 +80,24 @@ START_TEST(test_check_single_word_overflow_dictionary)
     char *word1 = hashtable[word1_hash];
     ck_assert(strcmp(word1, "Historicallyorganizationsandgovernmentshaveta") == 0);
     ck_assert(LENGTH == strlen(word1));
+}
+END_TEST
+
+START_TEST(test_check_word_leading_trailing_punct)
+{
+    hashmap_t hashtable[HASH_SIZE];
+    load_dictionary(DICTIONARY, hashtable);
+    char * correctEmbeddedPunct[] = {"I'll", "we'll","we'd","you're","can't","that's", "quadrilateral's"};
+    char * incorrectPunct[] = {",duck","?duck","duck,","duck!","duck.","d'uck","re-use"};
+    const int CHECK_SIZE = sizeof(correctEmbeddedPunct)/sizeof(correctEmbeddedPunct[0]);
+    
+
+    int i;
+    for (i = 0; i < CHECK_SIZE; i++) {
+     ck_assert(check_word(correctEmbeddedPunct[i], hashtable));
+         ck_assert(!check_word(incorrectPunct[i], hashtable));
+    }
+
 }
 END_TEST
 
