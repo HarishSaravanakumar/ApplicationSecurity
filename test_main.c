@@ -134,6 +134,10 @@ check_word_suite(void)
     check_word_case = tcase_create("Core");
     // tcase_add_test(check_word_case, test_check_word_normal);
     // tcase_add_test(check_word_case, test_check_words_normal);
+    tcase_add_test(check_word_case, test_null_input);
+    tcase_add_test(check_word_case, test_check_word_really_extra_long_word);
+    tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
+    tcase_add_test(check_word_case, test_check_word_leading_trailing_punct);
     suite_add_tcase(suite, check_word_case);
 
     return suite;
