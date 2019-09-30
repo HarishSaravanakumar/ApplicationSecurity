@@ -76,8 +76,7 @@ START_TEST(test_null_input)
 }
 END_TEST
 // *WORKS*
-START_TEST(test_check_word_really_extra_long_word)
-{
+START_TEST(test_check_word_really_extra_long_word){
     // Check for word equal to 45characters, doesnt matter if misspelled
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
@@ -114,15 +113,14 @@ END_TEST
 // }
 // END_TEST
 
-START_TEST(test_check_word_buffer_overflow2)
-{
+START_TEST(test_check_word_input_overflow){
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    char incorrect_word[500000];
-    for (int i=0;i< 499999; i++) 
-        incorrect_word[i] = 'A';
-    incorrect_word[56] = '\0'; // 57 break
-    ck_assert(!check_word(incorrect_word, hashtable));
+    char big_word[250000];
+    for (int i=0;i< 249999; i++) 
+        big_word[i] = 'x';
+    big_word[60] = '\0'; // 57 break
+    ck_assert(!check_word(big_word, hashtable));
 }
 END_TEST
 
@@ -148,7 +146,7 @@ check_word_suite(void)
     // tcase_add_test(check_word_case, test_check_word_normal);
     // tcase_add_test(check_word_case, test_check_words_normal);
     tcase_add_test(check_word_case, test_check_word_empty_hashtable);
-    tcase_add_test(check_word_case, test_check_word_buffer_overflow2);
+    tcase_add_test(check_word_case, test_check_word_input_overflow);
     tcase_add_test(check_word_case, test_null_input);
     tcase_add_test(check_word_case, test_check_word_really_extra_long_word);
     // tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
