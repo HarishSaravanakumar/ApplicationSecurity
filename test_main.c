@@ -97,22 +97,22 @@ END_TEST
 // }
 // END_TEST
 
-START_TEST(test_check_word_leading_trailing_punct){
-    hashmap_t hashtable[HASH_SIZE];
-    load_dictionary(DICTIONARY, hashtable);
-    char * correctEmbeddedPunct[] = {"I'll", "we'll","we'd","you're","can't","that's", "quadrilateral's"};
-    char * incorrectPunct[] = {",duck","?duck","duck,","duck!","duck.","d'uck","re-use"};
-    const int CHECK_SIZE = sizeof(correctEmbeddedPunct)/sizeof(correctEmbeddedPunct[0]);
+// START_TEST(test_check_word_leading_trailing_punct){
+//     hashmap_t hashtable[HASH_SIZE];
+//     load_dictionary(DICTIONARY, hashtable);
+//     char * correctEmbeddedPunct[] = {"I'll", "we'll","we'd","you're","can't","that's", "quadrilateral's"};
+//     char * incorrectPunct[] = {",duck","?duck","duck,","duck!","duck.","d'uck","re-use"};
+//     const int CHECK_SIZE = sizeof(correctEmbeddedPunct)/sizeof(correctEmbeddedPunct[0]);
     
 
-    int i;
-    for (i = 0; i < CHECK_SIZE; i++) {
-     ck_assert(check_word(correctEmbeddedPunct[i], hashtable));
-         ck_assert(!check_word(incorrectPunct[i], hashtable));
-    }
+//     int i;
+//     for (i = 0; i < CHECK_SIZE; i++) {
+//      ck_assert(check_word(correctEmbeddedPunct[i], hashtable));
+//          ck_assert(!check_word(incorrectPunct[i], hashtable));
+//     }
 
-}
-END_TEST
+// }
+// END_TEST
 
 START_TEST(test_check_word_buffer_overflow2)
 {
@@ -152,7 +152,7 @@ check_word_suite(void)
     tcase_add_test(check_word_case, test_null_input);
     tcase_add_test(check_word_case, test_check_word_really_extra_long_word);
     // tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
-    tcase_add_test(check_word_case, test_check_word_leading_trailing_punct);
+    // tcase_add_test(check_word_case, test_check_word_leading_trailing_punct);
     suite_add_tcase(suite, check_word_case);
 
     return suite;
