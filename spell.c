@@ -13,6 +13,10 @@
  **/
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+    // char word[strlen(c)];
+    // for (int i=0;i <=strlen(c);i++){
+    //     word[i] = c[i];
+    // }
     int word_index = hash_function(word); // hash value of word being passed in
     node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
     while(index_node != NULL){ // compare word and item in linked list
@@ -36,8 +40,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){
     if(dict_file){ //
         int line_hashvalue;
         char buffer[LENGTH]; // char array of allowed word length
-        for(int w=0; w<=HASH_SIZE;w++){ // set all values in hashtable to NULL
-        	hashtable[w]=NULL;
+        for(int i=0; i<=HASH_SIZE;i++){ // set all values in hashtable to NULL
+        	hashtable[i]=NULL;
         }
         while(fgets(buffer,LENGTH,dict_file)){ // copy LENGTH amount of data from dict_file into line
             if(buffer[strlen(buffer)-1] =='\n'){ // if last char is newline, change it to a NULL char (C specific)
@@ -158,13 +162,4 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
     }
     return misspell_count;
 }
-// int main(int argc, char * argv[]){
-// 	FILE *test_file = fopen(argv[1], "r"); //test_wordlist
-//     hashmap_t hashtable[HASH_SIZE];
-//     load_dictionary(argv[2], hashtable);
-//     char *misspelled[MAX_MISSPELLED]; //array that holds misspelled words
-//     int misspell_count = check_words(test_file, hashtable, misspelled);
-//     fclose(test_file);
-//     printf("MISPELLED: %i\n",misspell_count);
-// }
 
