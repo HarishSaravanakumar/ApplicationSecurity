@@ -103,7 +103,7 @@ END_TEST
 START_TEST(test_check_word_buffer_overflow2)
 {
     hashmap_t hashtable[HASH_SIZE];
-    load_dictionary(TESTDICTIONARY, hashtable);
+    load_dictionary(DICTIONARY, hashtable);
     char incorrect_word[500000];
     for (int i=0;i< 499999; i++) 
         incorrect_word[i] = 'A';
