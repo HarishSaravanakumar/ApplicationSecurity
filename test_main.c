@@ -49,10 +49,8 @@ START_TEST(test_check_words_normal)
 }
 END_TEST
 
-// ******MY TESTS*****
+// ******MY TESTS******
 
-TEST IF NULL
-// *WORKS*
 START_TEST(test_check_word_NULL_hashtable){
     hashmap_t hashtable[HASH_SIZE];
     for (int i = 0; i < HASH_SIZE; i++)
@@ -62,7 +60,7 @@ START_TEST(test_check_word_NULL_hashtable){
 }
 END_TEST
 
-START_TEST(test_null_input)
+START_TEST(test_null_word_input)
 {
     hashmap_t hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
@@ -92,7 +90,7 @@ START_TEST(test_check_word_input_overflow){
 END_TEST
 
 //checking case sensitiveness
-START_TEST(test_check_word_case)
+START_TEST(test_check_upper_lower_case)
 {   
     node* hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
@@ -108,14 +106,13 @@ check_word_suite(void)
     TCase * check_word_case;
     suite = suite_create("check_word");
     check_word_case = tcase_create("Core");
-    // tcase_add_test(check_word_case, test_check_word_normal);
-    // tcase_add_test(check_word_case, test_check_words_normal);
-    tcase_add_test(check_word_case, test_check_word_empty_hashtable);
-    tcase_add_test(check_word_case, test_check_word_input_overflow);
-    tcase_add_test(check_word_case, test_null_input);
+    tcase_add_test(check_word_case, test_check_word_normal);
+    tcase_add_test(check_word_case, test_check_words_normal);
+    tcase_add_test(check_word_case, test_check_word_NULL_hashtable);
+    tcase_add_test(check_word_case, test_null_word_input);
     tcase_add_test(check_word_case, test_check_word_big_word);
-    // tcase_add_test(check_word_case, test_check_single_word_overflow_dictionary);
-    // tcase_add_test(check_word_case, test_check_word_leading_trailing_punct);
+    tcase_add_test(check_word_case, test_check_word_input_overflow);
+    tcase_add_test(check_word_case, test_check_upper_lower_case);
     suite_add_tcase(suite, check_word_case);
 
     return suite;
