@@ -102,10 +102,10 @@ START_TEST(test_check_upper_lower_case)
 {   
     node* hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    const char* upper_case = "GREAT";
-    const char* lower_case = "great";
-    ck_assert(check_word(upper_case, hashtable));
-    ck_assert(check_word(lower_case, hashtable));
+    char *misspelled[MAX_MISSPELLED];
+    FILE *fp = fopen("test4.txt", "r");
+    int num_misspelled = check_words(fp, hashtable, misspelled);
+    ck_assert(num_misspelled == 0);
 }
 END_TEST
 
