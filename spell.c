@@ -7,25 +7,32 @@
  * Application Security
  * Assignment 1
  **/
+
+
 /**
  * Returns true if word is in dictionary else false.
  **/
 bool check_word(const char* word, hashmap_t hashtable[])
 {
+    if(word == NULL || hashtable == NULL || strlen(word) > LENGTH){
+        return false;
+    }
     int word_index = hash_function(word); // hash value of word being passed in
     node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
     while(index_node != NULL){ // compare word and item in linked list
-        if (strcmp(word, index_node->word) == 0)
+        if (strcmp(word, index_node->word) == 0) // the contents of both strings are equal
             return true;
         else // if false, traverse linked list
             index_node=index_node->next;
     }
     return false; // word not found in hashtable
 }
+
+
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
  **/
-bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){   
+bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[250000]){   
     FILE *dict_file = fopen(dictionary_file, "r"); // open and store dictionary_file
     if(!dict_file){ //if dict_file doesn't exist, return false
     	return false;
@@ -34,11 +41,11 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){
         int line_hashvalue;
         char buffer[LENGTH]; // char array of allowed word length
         for(int i=0; i<=HASH_SIZE;i++){ // set all values in hashtable to NULL
-        	hashtable[i]=NULL;
+        	hashtable[i] = NULL;
         }
-        while(fgets(buffer,LENGTH,dict_file)){ // copy LENGTH amount of data from dict_file into line
+        while(fgets(buffer,LENGTH,dict_file)){ // copy LENGTH amount of data from dict_file into buffer
             if(buffer[strlen(buffer)-1] =='\n'){ // if last char is newline, change it to a NULL char (C specific)
-            	buffer[strlen(buffer)-1]='\0';
+            	buffer[strlen(buffer)-1] = '\0';
             }
             for(int i=0;i<=strlen(buffer);i++){ // convert all characters to lowercase
             	buffer[i]= tolower(buffer[i]);
@@ -64,6 +71,8 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[5000000]){
       	return false;
     }
 }
+
+
 /**
  * Returns lowercase of input
  **/
@@ -83,6 +92,8 @@ char * str_lower(char *str_input){
     }
     return "";
 }
+
+
 /**
  * Removes punctuation from input
  **/
@@ -90,24 +101,26 @@ char *remove_punc(char *str_input) {
     if (str_input == NULL){
         return NULL;
     }
-    char *a = str_input;
-    char *b = str_input + strlen(str_input) - 1;
-    while (ispunct(*a)){
-    	a++;
+    char *ptr1 = str_input;
+    char *ptr2 = str_input + strlen(ptr1) - 1;
+    while (ispunct(*ptr1)){
+    	ptr1++;
     } 
-    while (ispunct(*b) && a < b){ 
-    	*b = 0; b--; 
+    while (ispunct(*ptr2) && ptr1 < ptr2){ 
+    	*ptr2 = 0;
+        ptr2--;
     }
-    if (strlen(a) == 0){
+    if (strlen(ptr1) == 0){
         return NULL;
     }
-    return a;
+    return ptr1;
 }
+
+
 /**
  * Returns true if all words are spelled correcty, false otherwise. Array misspelled is populated with words that are misspelled.
  **/
-int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
-{
+int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]){
     int misspell_count = 0;
     char file_buffer[95];
     char * word_ptr;
@@ -119,7 +132,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[])
         if ((newline_ptr = strchr(file_buffer, '\n')) != NULL){ //checking whether string has '/n'
             *newline_ptr = '\0'; //change to NULL, C expects NULL to be string
         }
-        word_ptr = strtok(file_buffer," "); // get first word in file_buffer
+        word_ptr = strtok(file_buffer," "); // get first word in file_buffer by parsing buffer by " "
         if (word_ptr != NULL && strlen(word_ptr) > LENGTH){
             word_ptr = NULL;
         }
