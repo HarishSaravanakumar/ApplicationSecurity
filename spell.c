@@ -100,11 +100,11 @@ char *remove_punc(char *str_input) {
 /**
  * Returns true if word is in dictionary else false.
  **/
-bool check_word(const char* word, hashmap_t hashtable[])
-{
+bool check_word(const char* word, hashmap_t hashtable[]){
     if(word == NULL || hashtable == NULL || strlen(word) > LENGTH){
         return false;
     }
+    word = str_lower(word);
     int word_index = hash_function(word); // hash value of word being passed in
     node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
     while(index_node != NULL){ // compare word and item in linked list
@@ -143,7 +143,11 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]){
             //     word_ptr = remove_punc(word_ptr);
             // }
             // if not on list, check lowercase version
-            if (check_word(str_lower(word_ptr), hashtable)){ // check lowercase version
+            // if (check_word(str_lower(word_ptr), hashtable)){ // check lowercase version
+            //     word_ptr = strtok(NULL, " ");
+            //     word_ptr = remove_punc(word_ptr);
+            // }
+            if (check_word(word_ptr, hashtable)){ // check lowercase version
                 word_ptr = strtok(NULL, " ");
                 word_ptr = remove_punc(word_ptr);
             }
