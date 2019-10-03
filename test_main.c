@@ -5,6 +5,7 @@
 #define DICTIONARY "wordlist.txt"
 #define TESTDICT "test_worlist.txt"
 
+
 START_TEST(test_dictionary_normal)
 {
     hashmap_t hashtable[HASH_SIZE];
@@ -14,6 +15,7 @@ START_TEST(test_dictionary_normal)
     // this as an exercise.
 }
 END_TEST
+
 
 START_TEST(test_check_word_normal)
 {
@@ -26,6 +28,7 @@ START_TEST(test_check_word_normal)
     // Test here: What if a word begins and ends with "?
 }
 END_TEST
+
 
 START_TEST(test_check_words_normal)
 {
@@ -51,6 +54,7 @@ END_TEST
 
 // ******MY TESTS******
 
+
 START_TEST(test_check_word_NULL_hashtable){
     hashmap_t hashtable[HASH_SIZE];
     for (int i = 0; i < HASH_SIZE; i++)
@@ -60,6 +64,7 @@ START_TEST(test_check_word_NULL_hashtable){
 }
 END_TEST
 
+
 START_TEST(test_null_word_input)
 {
     hashmap_t hashtable[HASH_SIZE];
@@ -68,7 +73,8 @@ START_TEST(test_null_word_input)
     ck_assert(!check_word(null_word,hashtable));
 }
 END_TEST
-// *WORKS*
+
+
 START_TEST(test_check_word_big_word){
     // Check for word equal to 45characters, doesnt matter if misspelled
     hashmap_t hashtable[HASH_SIZE];
@@ -77,6 +83,7 @@ START_TEST(test_check_word_big_word){
     ck_assert(!check_word(long_word, hashtable));
 }
 END_TEST
+
 
 START_TEST(test_check_word_input_overflow){
     hashmap_t hashtable[HASH_SIZE];
@@ -89,13 +96,16 @@ START_TEST(test_check_word_input_overflow){
 }
 END_TEST
 
+
 //checking case sensitiveness
 START_TEST(test_check_upper_lower_case)
 {   
     node* hashtable[HASH_SIZE];
     load_dictionary(DICTIONARY, hashtable);
-    ck_assert(check_word("GREAT", hashtable));
-    ck_assert(check_word("great", hashtable));
+    const char* upper_case = "GREAT";
+    const char* lower_case = "great";
+    ck_assert(check_word(upper_case, hashtable));
+    ck_assert(check_word(lower_case, hashtable));
 }
 END_TEST
 

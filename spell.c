@@ -9,25 +9,6 @@
  **/
 
 
-/**
- * Returns true if word is in dictionary else false.
- **/
-bool check_word(const char* word, hashmap_t hashtable[])
-{
-    if(word == NULL || hashtable == NULL || strlen(word) > LENGTH){
-        return false;
-    }
-    int word_index = hash_function(word); // hash value of word being passed in
-    node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
-    while(index_node != NULL){ // compare word and item in linked list
-        if (strcmp(word, index_node->word) == 0) // the contents of both strings are equal
-            return true;
-        else // if false, traverse linked list
-            index_node=index_node->next;
-    }
-    return false; // word not found in hashtable
-}
-
 
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
@@ -116,6 +97,25 @@ char *remove_punc(char *str_input) {
     return ptr1;
 }
 
+/**
+ * Returns true if word is in dictionary else false.
+ **/
+bool check_word(const char* word, hashmap_t hashtable[])
+{
+    if(word == NULL || hashtable == NULL || strlen(word) > LENGTH){
+        return false;
+    }
+    int word_index = hash_function(word); // hash value of word being passed in
+    node * index_node = hashtable[word_index]; // access hashtable at index (first item in linked list)
+    while(index_node != NULL){ // compare word and item in linked list
+        if (strcmp(word, index_node->word) == 0) // the contents of both strings are equal
+            return true;
+        else // if false, traverse linked list
+            index_node=index_node->next;
+    }
+    return false; // word not found in hashtable
+}
+
 
 /**
  * Returns true if all words are spelled correcty, false otherwise. Array misspelled is populated with words that are misspelled.
@@ -138,12 +138,12 @@ int check_words(FILE* fp, hashmap_t hashtable[], char * misspelled[]){
         }
         word_ptr = remove_punc(word_ptr); // remove punctuation
         while (word_ptr != NULL) {
-            if (check_word(word_ptr, hashtable)){ // check untouched word
-                word_ptr = strtok(NULL, " ");
-                word_ptr = remove_punc(word_ptr);
-            }
+            // if (check_word(word_ptr, hashtable)){ // check untouched word
+            //     word_ptr = strtok(NULL, " ");
+            //     word_ptr = remove_punc(word_ptr);
+            // }
             // if not on list, check lowercase version
-            else if (check_word(str_lower(word_ptr), hashtable)){ // check lowercase version
+            if (check_word(str_lower(word_ptr), hashtable)){ // check lowercase version
                 word_ptr = strtok(NULL, " ");
                 word_ptr = remove_punc(word_ptr);
             }
